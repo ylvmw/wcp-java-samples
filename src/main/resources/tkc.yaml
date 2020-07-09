@@ -1,0 +1,25 @@
+apiVersion: run.tanzu.vmware.com/v1alpha1
+kind: TanzuKubernetesCluster
+metadata:
+  name: tkc-2
+spec:
+  topology:
+    controlPlane:
+      count: 1
+      class: guaranteed-small
+      storageClass: gc-storage-profile
+    workers:
+      count: 2
+      class: guaranteed-small
+      storageClass: gc-storage-profile
+  distribution:
+    version: v1.17.4+vmware.1-tkg.1.052e7b9
+  settings:
+    network:
+      cni:
+        name: calico
+      services:
+        cidrBlocks: ["198.51.100.0/12"]
+      pods:
+        cidrBlocks: ["192.0.2.0/16"]
+      serviceDomain: "managedcluster.local"
